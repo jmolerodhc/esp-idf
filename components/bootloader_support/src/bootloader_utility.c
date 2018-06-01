@@ -65,6 +65,14 @@ static void set_cache_and_start_app(uint32_t drom_addr,
     uint32_t entry_addr,
     uint32_t image_flash_addr);
 
+void bootloader_service_watchdog()
+{
+    ESP_LOGE(TAG, "Asserting external watchdog");
+    REG_SET_BIT(GPIO_ENABLE_W1TS_REG, 0x1<<23);
+    gpio_matrix_out(23, SIG_GPIO_OUT_IDX, false, false);
+    REG_SET_BIT(GPIO_OUT_W1TS_REG, 0x1<<23);
+}
+
 bool bootloader_utility_load_partition_table(bootloader_state_t* bs)
 {
     const esp_partition_info_t *partitions;

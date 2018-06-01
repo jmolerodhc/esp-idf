@@ -15,6 +15,8 @@
 
 #include "esp_image_format.h"
 
+void bootloader_service_watchdog();
+
 /**
  * @brief Load partition table.
  *

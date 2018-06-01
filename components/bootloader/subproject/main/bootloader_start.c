@@ -35,6 +35,9 @@ static int selected_boot_partition(const bootloader_state_t *bs);
  */
 void call_start_cpu0()
 {
+    //0. Watchdog Assertion
+    bootloader_service_watchdog();
+
     // 1. Hardware initialization
     if(bootloader_init() != ESP_OK){
         return;
